@@ -17,9 +17,13 @@ Paseo is the agentic development environment: run coding agents (Claude Code, Co
 ## Getting set up
 
 1. Before the service will start, StartOS asks you to **set a password** (critical task). Complete it — this password signs you in to the Paseo web UI and protects the daemon from anyone on your network.
-2. Open the **Web UI** interface from the service page.
-3. Sign in with the password you set.
-4. From inside the Paseo UI, sign in to each agent provider you want to use (Claude, Codex, etc.) or configure API keys. Credentials persist across restarts.
+2. Open the **Web UI** interface from the service page. Paseo greets you with a **"Connect your computer"** screen — this is normal. Because the daemon is password-protected, the UI cannot auto-connect; you point it at its own server once per browser:
+3. Choose **Direct connection** and enter:
+   - **Host / Port** — the same address you opened in your browser (copy the hostname and port from the address bar / the Web UI interface address on the service page).
+   - **Use SSL** — enable only if the address starts with `https` (e.g. a clearnet domain); leave off for plain `.local`/LAN addresses.
+   - **Password** — the password you set in step 1.
+4. Click **Connect**. The connection is remembered by that browser — you land straight in Paseo on future visits.
+5. From inside the Paseo UI, sign in to each agent provider you want to use (Claude, Codex, etc.) or configure API keys. Credentials persist across restarts.
 
 ## Rotating the password
 

@@ -73,6 +73,13 @@ Install → critical task **Set Password** blocks first start until the user run
 the action → daemon starts with `PASEO_PASSWORD` set. If the store ever loses the
 password, the task reappears and the service cannot be considered configured.
 
+First UI visit shows Paseo's **"Connect your computer"** screen. Upstream's
+same-origin auto-connect deliberately probes without a password, so with
+`PASEO_PASSWORD` set the probe fails closed and the UI asks once per browser:
+**Direct connection** → host/port of the served UI address, SSL matching the
+address scheme, and the service password. The host then persists and later
+visits skip the screen.
+
 ## Actions
 
 - **Set Password** (`set-password`) — sets/rotates the Paseo password. Warns when
