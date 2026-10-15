@@ -16,13 +16,25 @@ Paseo is the agentic development environment: run coding agents (Claude Code, Co
 
 ## Getting set up
 
-1. Before the service will start, StartOS asks you to **set a password** (critical task). Complete it — this password signs you in to the Paseo web UI and protects the daemon from anyone on your network.
-2. Open the **Web UI** interface from the service page. Paseo greets you with a **"Connect your computer"** screen — this is normal. Because the daemon is password-protected, the UI cannot auto-connect; you point it at its own server once per browser:
-3. Choose **Direct connection** and enter:
-   - **Host / Port** — the same address you opened in your browser (copy the hostname and port from the address bar / the Web UI interface address on the service page).
-   - **Use SSL** — enable only if the address starts with `https` (e.g. a clearnet domain); leave off for plain `.local`/LAN addresses.
-   - **Password** — the password you set in step 1.
-4. Click **Connect**. The connection is remembered by that browser — you land straight in Paseo on future visits.
+1. Before the service will start, StartOS asks you to **set a password** (critical task). Complete it — this password signs you in to Paseo and protects the daemon from anyone on your network.
+2. Open the **Web UI** interface. Paseo greets you with a **"Connect your computer"** screen. This is normal — because the daemon is password-protected, the web app cannot connect on its own, so you point it at your own server. This takes a few seconds and is **once per browser** (the connection is remembered afterwards).
+
+   ![Paseo welcome screen — click Direct connection](https://raw.githubusercontent.com/bobodread876/paseo-startos/main/assets/instructions/01-welcome.png)
+
+3. Click **Direct connection** (marker 1 above). A dialog opens:
+
+   ![Direct connection dialog — what to enter in each field](https://raw.githubusercontent.com/bobodread876/paseo-startos/main/assets/instructions/02-direct-connection.png)
+
+   - **Host** (marker 2): type the exact host from your browser's address bar — the same address you used to open the Web UI (for example `paseo.your-server.local`, your server's LAN IP, or your clearnet domain). **Not** `localhost` — that would mean the device the browser runs on.
+   - **Port** (marker 3): the port shown in the address bar. No port shown means the default: `443` when the address is `https`, `80` when it is `http` (including Tor `.onion` addresses accessed over `http`).
+   - **Use SSL** (marker 4): enable only when the address is `https` (e.g. a clearnet domain). Leave it off for `.local`, plain IP addresses, and `.onion`.
+   - **Password** (marker 5): the password you set in step 1.
+   - Click **Connect** (marker 6).
+
+4. You land in the Paseo app — done:
+
+   ![Paseo home after a successful connection](https://raw.githubusercontent.com/bobodread876/paseo-startos/main/assets/instructions/03-connected.png)
+
 5. From inside the Paseo UI, sign in to each agent provider you want to use (Claude, Codex, etc.) or configure API keys. Credentials persist across restarts.
 
 ## Rotating the password
