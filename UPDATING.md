@@ -20,10 +20,10 @@ docker buildx imagetools inspect ghcr.io/getpaseo/paseo:<version> --format '{{.M
 
 ## Applying the bump
 
-1. `Dockerfile` — update the tag and digest in `FROM`.
-2. `Dockerfile` — also refresh the pinned agent CLIs to current (`npm view <pkg> version`):
+1. `Dockerfile`: update the tag and digest in `FROM`.
+2. `Dockerfile`: also refresh the pinned agent CLIs to current (`npm view <pkg> version`):
    `@anthropic-ai/claude-code`, `@openai/codex`, `opencode-ai`.
-3. `startos/versions/current.ts` — set `version` to `<upstream>:0` (reset the
+3. `startos/versions/current.ts`: set `version` to `<upstream>:0` (reset the
    downstream revision to 0) and rewrite `releaseNotes`.
 4. Optionally mention notable upstream changes in the release notes.
 5. Build both arches (`make`) and publish.

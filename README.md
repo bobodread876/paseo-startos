@@ -6,7 +6,7 @@
 
 > Everything not listed in this document should behave the same as upstream Paseo.
 > If a feature, setting, or behavior is not mentioned here, the upstream
-> documentation is accurate and fully applicable — see the Documentation section of
+> documentation is accurate and fully applicable. See the Documentation section of
 > `instructions.md` for links.
 
 ## Table of Contents
@@ -28,12 +28,12 @@
 The image is a **child of the official upstream image**, pinned by tag and digest:
 `ghcr.io/getpaseo/paseo:0.11.2`. The Dockerfile adds the coding-agent CLIs Paseo
 orchestrates (pinned): `@anthropic-ai/claude-code`, `@openai/codex`,
-`opencode-ai` — the pattern from upstream's `docker/Dockerfile.agents.example`.
+`opencode-ai`, following the pattern from upstream's `docker/Dockerfile.agents.example`.
 
 Architectures: `x86_64`, `aarch64`.
 
 The daemon runs via the upstream entrypoint (`tini` → `paseo-docker-entrypoint` →
-the supervisor entrypoint) with `runAsInit: true` — tini must be PID 1. Paseo runs
+the supervisor entrypoint) with `runAsInit: true` because tini must be PID 1. Paseo runs
 as user `paseo` (1000:1000) via the entrypoint's gosu drop. One subcontainer
 (`paseo-sub`), one daemon (`primary`).
 
@@ -48,7 +48,7 @@ Do not hand-edit anything under `/home/paseo/.paseo` while the service is runnin
 
 ## File Models
 
-- `store.json` (on the `startos` volume): `{ password?: string }` — the Paseo login
+- `store.json` (on the `startos` volume): `{ password?: string }`: the Paseo login
   password. Written only by the **Set Password** action; read by `main.ts` and
   passed to the daemon as `PASEO_PASSWORD` (Paseo bcrypts it at startup). Never
   mounted into a container.
@@ -59,7 +59,7 @@ None.
 
 ## Network Access and Interfaces
 
-One interface: **`ui`** (`type: ui`, HTTP, port 6767) — the Paseo web UI, API
+One interface: **`ui`** (`type: ui`, HTTP, port 6767): the Paseo web UI, API
 (`/api/*`), WebSocket (`/ws`), and MCP (`/mcp/*`) endpoints on a single origin.
 `/api/health` is unauthenticated by upstream design.
 
@@ -82,25 +82,25 @@ visits skip the screen.
 
 ## Actions
 
-- **Set Password** (`set-password`) — sets/rotates the Paseo password. Warns when
+- **Set Password** (`set-password`): sets/rotates the Paseo password. Warns when
   replacing an existing password. The daemon restarts on rotation (reactive read).
   Safe to re-run; each run overwrites.
 
 ## Tasks
 
-- **Set Password** (critical) — raised by the `watchCredentials` init whenever the
+- **Set Password** (critical): raised by the `watchCredentials` init whenever the
   store has no password. Clears when a password is set. Idempotent.
 
 ## Health Checks
 
-- **Web Interface** — `GET http://127.0.0.1:6767/api/health` (upstream's own
+- **Web Interface**: `GET http://127.0.0.1:6767/api/health` (upstream's own
   liveness endpoint). Failure means the daemon is not serving.
 
 ## Backups and Restore
 
 Both volumes (`main`, `startos`) are backed up. A restore brings back workspaces,
 agent credentials, and the login password. Restoring `main` without `startos`
-would lose the password — the critical task then prompts to set a new one.
+would lose the password; the critical task then prompts to set a new one.
 
 ## Limitations and Differences
 
