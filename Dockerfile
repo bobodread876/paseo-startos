@@ -11,14 +11,14 @@
 # /api/health. StartOS drives it with its own entrypoint contract
 # (sdk.useEntrypoint() + runAsInit) and passes PASEO_PASSWORD/PASEO_HOSTNAMES
 # via env at runtime.
-FROM ghcr.io/getpaseo/paseo:0.11.2@sha256:ea6a922a7282d5368f7d0eae17caff6ce5ccde2bbac3f559c2e4c483d1cf2059
+FROM ghcr.io/getpaseo/paseo:0.17.5@sha256:321c8361600602c6e1f1c7a492efc0efa251609730b4086c2f973ad3f14f848d
 
 USER root
 
 # Coding-agent CLIs. Pinned for reproducible builds; bump alongside the Paseo
 # version when updating the package (see UPDATING.md).
 RUN npm install -g --no-audit --no-fund \
-      @anthropic-ai/claude-code@2.1.300 \
-      @openai/codex@0.162.1 \
-      opencode-ai@1.19.0 \
+      @anthropic-ai/claude-code@2.1.332 \
+      @openai/codex@0.172.0 \
+      opencode-ai@1.19.6 \
     && npm cache clean --force
