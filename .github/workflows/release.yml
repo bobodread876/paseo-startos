@@ -6,7 +6,15 @@ on:
       - 'v*.*'
 
 jobs:
+  # Atoll's local publisher signs and uploads the tested archives.
+  check-atoll-build:
+    if: github.repository == 'bobodread876/paseo-startos'
+    permissions:
+      contents: read
+    uses: Start9Labs/start-technologies/.github/workflows/build.yml@master
+
   release:
+    if: github.repository != 'bobodread876/paseo-startos'
     uses: Start9Labs/start-technologies/.github/workflows/release.yml@master
     with:
       RELEASE_REGISTRY: ${{ vars.RELEASE_REGISTRY }}
